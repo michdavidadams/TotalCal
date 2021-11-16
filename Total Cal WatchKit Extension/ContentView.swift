@@ -8,15 +8,95 @@
 import SwiftUI
 import HealthKit
 
-struct ContentView: View {
-    private var healthStore: HealthStore?
-    @State private var calories: [Calorie] = []
-    
-    init() {
-        healthStore = HealthStore()
+func fetchHealthData() -> Void {
+    let healthStore = HKHealthStore()
+    if HKHealthStore.isHealthDataAvailable() {
+        let readData = Set([
+            HKObjectType.quantityType(forIdentifier: .heartRate)!
+        ])
+        
+        healthStore.requestAuthorization(toShare: [], read: readData) { (success, error) in
+            if success {
+                let calendar = NSCalendar.current
+                
+                var anchorComponents = calendar.dateComponents([.day, .month, .year, .weekday], from: NSDate() as Date)
+                
+                let offset = (7 + anchorComponents.weekday! - 2) % 7
+                
+                anchorComponents.day! -= offset
+                anchorComponents.hour = 2
+                
+                guard let anchorDate = Calendar.current.date(from: anchorComponents) else {
+                    fatalError("*** unable to create a valid date from the given components ***")
+                }
+                
+                let interval = NSDateComponents()
+                interval.minute = 30
+                                    
+                let endDate = Date()
+                                            
+                guard let startDate = calendar.date(byAdding: .month, value: -1, to: endDate) else {
+                    fatalError("*** Unable to calculate the start date ***")
+                }
+                                    
+                guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
+                    fatalError("*** Unable to create a step count type ***")
+                }
+ 
+                let query = HKStatisticsCollectionQuery(quantityType: quantityType,
+                                                        quantitySamplePredicate: nil,
+                                                            options: .discreteAverage,
+                                                            anchorDate: anchorDate,
+                                                            intervalComponents: interval as DateComponents)
+                
+                query.initialResultsHandler = {
+                    query, results, error in
+                    
+                    guard let statsCollection = results else {
+                        fatalError("*** An error occurred while calculating the statistics: \(String(describing: error?.localizedDescription)) ***")
+                        
+                    }
+                                        
+                    statsCollection.enumerateStatistics(from: startDate, to: endDate) { statistics, stop in
+                        if let quantity = statistics.averageQuantity() {
+                            let date = statistics.startDate
+                            //for: E.g. for steps it's HKUnit.count()
+                            let value = quantity.doubleValue(for: HKUnit(from: "count/min"))
+                            print("done")
+                            print(value)
+                            print(date)
+                                                        
+                        }
+                    }
+                    
+                }
+                
+                healthStore.execute(query)
+                
+            } else {
+                print("Authorization failed")
+ 
+            }
+        }
     }
+}
+
+struct ContentView: View {
+    
     var body: some View {
-        Text("Test")
+        ScrollView {
+            VStack(spacing: 10) {
+                Text("Consumed energy".uppercased())
+                    .font(.system(size: 13))
+                    .bold()
+                Text("")
+                    .font(.largeTitle)
+                    .bold()
+                Button(action: fetchHealthData) {
+                    Text("Update")
+                }
+            }
+        }
     }
 }
 
@@ -24,37 +104,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-private func initialization() {
-    if let healthStore = HealthStore {
-        healthStore.requestAuthorization { success in
-            if success {
-                healthStore.calculateDietaryEnergy { statisticsCollection in
-                    if let statisticsCollection = statisticsCollection {
-                        updateFromStatistics(statisticsCollection)
-                    }
-                }
-            }
-        }
-    }
-}
-
-private func updateFromStatistics( _ statisticsCollection: HKStatisticsCollection) {
-        let startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
-        let endDate = Date()
-        
-        statisticsCollection.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
-            
-            let count  = statistics.sumQuantity()?.doubleValue(for: .count())
-            
-            let step = Step(count: Int(count ?? 0), date: statistics.startDate)
-            steps.append(step)
-        }
-        // To Sort them elements from the latest
-        steps.reverse()
-        steps.removeFirst()
-        
     }
 }

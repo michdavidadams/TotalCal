@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import HealthKit
 
 @main
 struct Total_CalApp: App {
+    
     @SceneBuilder var body: some Scene {
         WindowGroup {
             NavigationView {
