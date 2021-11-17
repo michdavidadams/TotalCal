@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		581937B02745B16700C03740 /* CaloriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581937AF2745B16700C03740 /* CaloriesViewModel.swift */; };
 		587AD76C270A39C7002E39B2 /* Total Cal WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 587AD76B270A39C7002E39B2 /* Total Cal WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		587AD771270A39CB002E39B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587AD770270A39CB002E39B2 /* Assets.xcassets */; };
 		587AD777270A39CC002E39B2 /* Total Cal WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 587AD776270A39CC002E39B2 /* Total Cal WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		581937AF2745B16700C03740 /* CaloriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesViewModel.swift; sourceTree = "<group>"; };
 		587AD767270A39C7002E39B2 /* Total Cal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Total Cal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		587AD76B270A39C7002E39B2 /* Total Cal WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Total Cal WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		587AD770270A39CB002E39B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				587AD799270A3B95002E39B2 /* Total Cal WatchKit Extension.entitlements */,
 				587AD77B270A39CC002E39B2 /* Total_CalApp.swift */,
+				581937AF2745B16700C03740 /* CaloriesViewModel.swift */,
 				587AD77D270A39CC002E39B2 /* ContentView.swift */,
 				587AD77F270A39CC002E39B2 /* NotificationController.swift */,
 				587AD781270A39CC002E39B2 /* NotificationView.swift */,
@@ -280,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				581937B02745B16700C03740 /* CaloriesViewModel.swift in Sources */,
 				587AD780270A39CC002E39B2 /* NotificationController.swift in Sources */,
 				587AD77E270A39CC002E39B2 /* ContentView.swift in Sources */,
 				587AD784270A39CC002E39B2 /* ComplicationController.swift in Sources */,
