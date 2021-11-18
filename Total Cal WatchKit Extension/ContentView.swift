@@ -17,11 +17,16 @@ struct ContentView: View {
                 Text("Energy Consumed, fatass.".uppercased())
                     .font(.system(size: 13))
                     .bold()
-                //Text("\(caloriesViewModel)")
+                LazyVStack(spacing: 10) {
+                    ForEach(caloriesViewModel.data, id: \.self) { sample in
+                        Text("\(sample)")
+                    }
+                }
             }
         }
     }
 }
+
 
 
 struct ContentView_Previews: PreviewProvider {
