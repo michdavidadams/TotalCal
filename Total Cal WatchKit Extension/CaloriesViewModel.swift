@@ -8,19 +8,9 @@
 import Foundation
 import HealthKit
 
-class HistoryViewModel: ObservableObject {
+class CaloriesViewModel: ObservableObject {
     @Published var data: [HKCategorySample] = []
-    
-    var averageSeconds: Int {
-        let seconds: [Int] = data.map { ($0.endDate - $0.startDate).second! }
-        let total = seconds.reduce(0, +)
-        
-        if total > 0 {
-            return total / seconds.count
-        }
-        
-        return 0
-    }
+    let sumOption = HKStatisticsOptions.cumulativeSum
     
     init() {
         updateData()
@@ -31,29 +21,26 @@ class HistoryViewModel: ObservableObject {
         if HKHealthStore.isHealthDataAvailable() {
             let healthStore = HKHealthStore()
            
-            guard let sampleType = HKSampleType.categoryType(forIdentifier: .toothbrushingEvent) else {
+            guard let consumedEnergy = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
                 fatalError("This method should never fail")
             }
             
-            let observerQuery = HKObserverQuery(sampleType: sampleType, predicate: nil) { query, completionHandler, error in
+            let observerQuery = HKObserverQuery(sampleType: consumedEnergy, predicate: nil) { query, completionHandler, error in
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
                 
-                let query = HKSampleQuery(sampleType: sampleType, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: [
-                    NSSortDescriptor(key: "startDate", ascending: false)
-                ]) { query, results, error in
-                    guard let results = results as? [HKCategorySample] else {
-                        fatalError(error?.localizedDescription ?? "Something went wrong")
-                    }
+                let statisticsSumQuery = HKStatisticsQuery(quantityType: consumedEnergy, quantitySamplePredicate: nil, options: self.sumOption)
+                      { (query, result, error) in
+                          if let sumQuantity = result?.sumQuantity() {
 
-                    DispatchQueue.main.async {
-                        self.data = results
-                    }
-                }
+                              let numberOfCalories = Int(sumQuantity.doubleValue(for: .kilocalorie()))
+                              print(numberOfCalories)
+                          }
+                  }
                 
-                healthStore.execute(query)
+                healthStore.execute(statisticsSumQuery)
                 completionHandler()
             }
             

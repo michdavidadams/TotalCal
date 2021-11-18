@@ -127,8 +127,8 @@
 			children = (
 				587AD799270A3B95002E39B2 /* Total Cal WatchKit Extension.entitlements */,
 				587AD77B270A39CC002E39B2 /* Total_CalApp.swift */,
-				581937AF2745B16700C03740 /* CaloriesViewModel.swift */,
 				587AD77D270A39CC002E39B2 /* ContentView.swift */,
+				581937AF2745B16700C03740 /* CaloriesViewModel.swift */,
 				587AD77F270A39CC002E39B2 /* NotificationController.swift */,
 				587AD781270A39CC002E39B2 /* NotificationView.swift */,
 				587AD783270A39CC002E39B2 /* ComplicationController.swift */,

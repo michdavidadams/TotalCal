@@ -9,10 +9,16 @@ import SwiftUI
 import HealthKit
 
 struct ContentView: View {
+    @ObservedObject var caloriesViewModel = CaloriesViewModel()
     
     var body: some View {
         ScrollView {
-            Text("Test")
+            VStack {
+                Text("Energy Consumed, fatass.".uppercased())
+                    .font(.system(size: 13))
+                    .bold()
+                //Text("\(caloriesViewModel)")
+            }
         }
     }
 }
