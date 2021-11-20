@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		581937B02745B16700C03740 /* CaloriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581937AF2745B16700C03740 /* CaloriesViewModel.swift */; };
 		587AD76C270A39C7002E39B2 /* Total Cal WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 587AD76B270A39C7002E39B2 /* Total Cal WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		587AD771270A39CB002E39B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587AD770270A39CB002E39B2 /* Assets.xcassets */; };
 		587AD777270A39CC002E39B2 /* Total Cal WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 587AD776270A39CC002E39B2 /* Total Cal WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -19,6 +18,7 @@
 		587AD786270A39CD002E39B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587AD785270A39CD002E39B2 /* Assets.xcassets */; };
 		587AD789270A39CD002E39B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587AD788270A39CD002E39B2 /* Preview Assets.xcassets */; };
 		587AD79C270A3B96002E39B2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587AD79B270A3B96002E39B2 /* HealthKit.framework */; };
+		58C1DF6627487D9000C94659 /* HealthKitHealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1DF6527487D9000C94659 /* HealthKitHealthStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		581937AF2745B16700C03740 /* CaloriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesViewModel.swift; sourceTree = "<group>"; };
 		587AD767270A39C7002E39B2 /* Total Cal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Total Cal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		587AD76B270A39C7002E39B2 /* Total Cal WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Total Cal WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		587AD770270A39CB002E39B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		587AD78B270A39CD002E39B2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		587AD799270A3B95002E39B2 /* Total Cal WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Total Cal WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		587AD79B270A3B96002E39B2 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		58C1DF6527487D9000C94659 /* HealthKitHealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHealthStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +127,8 @@
 			children = (
 				587AD799270A3B95002E39B2 /* Total Cal WatchKit Extension.entitlements */,
 				587AD77B270A39CC002E39B2 /* Total_CalApp.swift */,
+				58C1DF6527487D9000C94659 /* HealthKitHealthStore.swift */,
 				587AD77D270A39CC002E39B2 /* ContentView.swift */,
-				581937AF2745B16700C03740 /* CaloriesViewModel.swift */,
 				587AD77F270A39CC002E39B2 /* NotificationController.swift */,
 				587AD781270A39CC002E39B2 /* NotificationView.swift */,
 				587AD783270A39CC002E39B2 /* ComplicationController.swift */,
@@ -283,11 +283,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				581937B02745B16700C03740 /* CaloriesViewModel.swift in Sources */,
 				587AD780270A39CC002E39B2 /* NotificationController.swift in Sources */,
 				587AD77E270A39CC002E39B2 /* ContentView.swift in Sources */,
 				587AD784270A39CC002E39B2 /* ComplicationController.swift in Sources */,
 				587AD77C270A39CC002E39B2 /* Total_CalApp.swift in Sources */,
+				58C1DF6627487D9000C94659 /* HealthKitHealthStore.swift in Sources */,
 				587AD782270A39CC002E39B2 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

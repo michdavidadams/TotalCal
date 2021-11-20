@@ -9,20 +9,14 @@ import SwiftUI
 import HealthKit
 
 struct ContentView: View {
-    @ObservedObject var caloriesViewModel = CaloriesViewModel()
+    @ObservedObject var healthStore = HealthKitHealthStore()
+    var energyStandard = HKQuantity(unit: .kilocalorie(), doubleValue: 0000.0)
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("Energy Consumed, fatass.".uppercased())
-                    .font(.system(size: 13))
-                    .bold()
-                LazyVStack(spacing: 10) {
-                    ForEach(caloriesViewModel.data, id: \.self) { sample in
-                        Text("\(sample)")
-                    }
-                }
-            }
+        VStack {
+            Text("Dietary: \(healthStore.dietaryEnergy)")
+        }.onAppear {
+            healthStore.requestAuthorization()
         }
     }
 }
