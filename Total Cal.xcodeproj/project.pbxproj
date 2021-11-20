@@ -18,7 +18,6 @@
 		587AD786270A39CD002E39B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587AD785270A39CD002E39B2 /* Assets.xcassets */; };
 		587AD789270A39CD002E39B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587AD788270A39CD002E39B2 /* Preview Assets.xcassets */; };
 		587AD79C270A3B96002E39B2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587AD79B270A3B96002E39B2 /* HealthKit.framework */; };
-		58C1DF6627487D9000C94659 /* HealthKitHealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1DF6527487D9000C94659 /* HealthKitHealthStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +78,6 @@
 		587AD78B270A39CD002E39B2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		587AD799270A3B95002E39B2 /* Total Cal WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Total Cal WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		587AD79B270A3B96002E39B2 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
-		58C1DF6527487D9000C94659 /* HealthKitHealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitHealthStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +125,6 @@
 			children = (
 				587AD799270A3B95002E39B2 /* Total Cal WatchKit Extension.entitlements */,
 				587AD77B270A39CC002E39B2 /* Total_CalApp.swift */,
-				58C1DF6527487D9000C94659 /* HealthKitHealthStore.swift */,
 				587AD77D270A39CC002E39B2 /* ContentView.swift */,
 				587AD77F270A39CC002E39B2 /* NotificationController.swift */,
 				587AD781270A39CC002E39B2 /* NotificationView.swift */,
@@ -287,7 +284,6 @@
 				587AD77E270A39CC002E39B2 /* ContentView.swift in Sources */,
 				587AD784270A39CC002E39B2 /* ComplicationController.swift in Sources */,
 				587AD77C270A39CC002E39B2 /* Total_CalApp.swift in Sources */,
-				58C1DF6627487D9000C94659 /* HealthKitHealthStore.swift in Sources */,
 				587AD782270A39CC002E39B2 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

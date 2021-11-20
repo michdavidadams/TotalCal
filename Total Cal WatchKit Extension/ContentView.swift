@@ -10,18 +10,16 @@ import HealthKit
 
 struct ContentView: View {
     @ObservedObject var healthStore = HealthKitHealthStore()
-    var energyStandard = HKQuantity(unit: .kilocalorie(), doubleValue: 0000.0)
+    var energyStandard = HKQuantity(unit: HKUnit(from: ""), doubleValue: 0.0)
     
     var body: some View {
         VStack {
-            Text("Dietary: \(healthStore.dietaryEnergy)")
+            Text("Dietary: \(healthStore.dietaryEnergyValue ?? energyStandard)")
         }.onAppear {
-            healthStore.requestAuthorization()
+            healthStore.setUpHealthStore()
         }
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
