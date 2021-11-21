@@ -25,47 +25,51 @@ struct Total_CalApp: App {
 class HealthKitHealthStore: ObservableObject {
     var healthStore: HKHealthStore?
     init() {
-            if HKHealthStore.isHealthDataAvailable() {
-                healthStore = HKHealthStore()
-            }
+        if HKHealthStore.isHealthDataAvailable() {
+            healthStore = HKHealthStore()
         }
+    }
     func setUpHealthStore() {
-            let typesToRead: Set = [
-                HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-                HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-                HKQuantityType.quantityType(forIdentifier: .basalEnergyBurned)!
-            ]
-            healthStore?.requestAuthorization(toShare: nil, read: typesToRead, completion: { success, error in
-                if success {
-                    print("--> requestAuthorization")
-                    self.calculateDietaryEnergy()
-                }
-            })
-        }
+        let typesToRead: Set = [
+            HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+            HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKQuantityType.quantityType(forIdentifier: .basalEnergyBurned)!
+        ]
+        healthStore?.requestAuthorization(toShare: nil, read: typesToRead, completion: { success, error in
+            if success {
+                print("--> requestAuthorization")
+                self.calculateDietaryEnergy()
+            }
+        })
+    }
     
     // Read data
     @Published var dietaryEnergyValue: HKQuantity?
     @Published var activeEnergyValue: HKQuantity?
     @Published var restingEnergyValue: HKQuantity?
     var query: HKStatisticsQuery!
-
+    
     func calculateDietaryEnergy() {
-            guard let dietaryEnergy = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
-                // This should never fail when using a defined constant.
-                fatalError("*** Unable to get the bloodPressure count ***")
-            }
-            query = HKStatisticsQuery(quantityType: dietaryEnergy,
-                                      quantitySamplePredicate: nil,
-                                      options: .cumulativeSum) {
-                query, statistics, error in
-                DispatchQueue.main.async{
-                    self.dietaryEnergyValue = HKQuantity(unit: HKUnit(from: .kilocalorie), doubleValue: 0000)
-                    print("----> calculateDietaryEnergy statistics: \(statistics)")
-                    print("----> calculateDietaryEnergy error: \(error)")
-                    print("----> calculateDietaryEnergy: \(self.dietaryEnergyValue)")
-                }
-            }
-            healthStore!.execute(query!)
+        guard let dietaryEnergy = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
+            // This should never fail when using a defined constant.
+            fatalError("*** Unable to get the bloodPressure count ***")
         }
-
+        let date = NSDate()
+        let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let newDate = cal.startOfDay(for: date as Date)
+        let predicate = HKQuery.predicateForSamples(withStart: newDate, end: NSDate() as Date, options: [])
+        query = HKStatisticsQuery(quantityType: dietaryEnergy,
+                                  quantitySamplePredicate: predicate,
+                                  options: .cumulativeSum) {
+            query, statistics, error in
+            DispatchQueue.main.async{
+                //self.dietaryEnergyValue = HKQuantity(unit: HKUnit(from: .kilocalorie), doubleValue: 0000)
+                print("----> calculateDietaryEnergy statistics: \(statistics)")
+                print("----> calculateDietaryEnergy error: \(error)")
+                print("----> calculateDietaryEnergy: \(self.dietaryEnergyValue)")
+            }
+        }
+        healthStore!.execute(query!)
+    }
+    
 }
